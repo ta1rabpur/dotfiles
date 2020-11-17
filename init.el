@@ -25,7 +25,7 @@
 (eval-when-compile
   (add-to-list 'load-path default-directory)
   (require 'use-package))
-(require 'diminish)
+;(require 'diminish)
 (require 'bind-key)
 ;;language
 ;(load-library "anthy")
@@ -283,6 +283,35 @@
 
 (setq org-latex-with-hyperref nil)
 
+;(require 'helm-c-yasnippet)
+;(setq helm-yas-space-match-any-greedy t)
+;(global-set-key (kbd "C-c y") 'helm-yas-complete)
+;(push '("emacs.+/snippets/" . Snippet-mode) auto-mode-alist)
+;(yas-global-mode 1)
+
+
+;;yasnippet
+(add-to-list 'load-path
+			  "~/.emacs.d/plugins/yasnippet")
+;(require 'yasnippet)
+;(setq yas-snippet-dirs
+;	  '("~/.emacs.d/mysnippets"
+;		"~/.emacs.d/yasnippets"
+;		))
+;(define-key yas-minor-mode-map (kbd "C-x i i")'yas-insert-snippet)
+;(define-key yas-minor-mode-map (kbd "C-x i n")'yas-new-snippet)
+;(define-key yas-minor-mode-map (kbd "C-x i v")'yas-visit-snippet-file)
+(use-package yasnippet
+  :bind
+  (:map yas-minor-mode-map
+		("C-x i n" . yas-new-snippet)
+		("C-x i v" . yas-visit-snippet-file)
+		("C-M-i"   . yas-insert-snippet))
+  (:map yas-keymap
+		("<tab>" . nil))
+  :config
+(yas-global-mode 1))
+
 
 (use-package lsp-mode
   :commands lsp
@@ -396,34 +425,6 @@
 (require 'helm-config)
 (helm-mode 1)
 
-;(require 'helm-c-yasnippet)
-;(setq helm-yas-space-match-any-greedy t)
-;(global-set-key (kbd "C-c y") 'helm-yas-complete)
-;(push '("emacs.+/snippets/" . Snippet-mode) auto-mode-alist)
-;(yas-global-mode 1)
-
-
-;;yasnippet
-(add-to-list 'load-path
-			  "~/.emacs.d/plugins/yasnippet")
-;(require 'yasnippet)
-;(setq yas-snippet-dirs
-;	  '("~/.emacs.d/mysnippets"
-;		"~/.emacs.d/yasnippets"
-;		))
-;(define-key yas-minor-mode-map (kbd "C-x i i")'yas-insert-snippet)
-;(define-key yas-minor-mode-map (kbd "C-x i n")'yas-new-snippet)
-;(define-key yas-minor-mode-map (kbd "C-x i v")'yas-visit-snippet-file)
-(use-package yasnippet
-  :bind
-  (:map yas-minor-mode-map
-		("C-x i n" . yas-new-snippet)
-		("C-x i v" . yas-visit-snippet-file)
-		("C-M-i"   . yas-insert-snippet))
-  (:map yas-keymap
-		("<tab>" . nil))
-  :config
-(yas-global-mode 1))
 
 ;;ccls
 (use-package ccls
@@ -512,9 +513,9 @@
   ("<f8>" . neotree-toggle))
 
 										;which-key
-(use-package which-key
-  :diminish which-key-mode
-  :hook (after-init . which-key-mode))
+;(use-package which-key
+;  :diminish which-key-mode
+;  :hook (after-init . which-key-mode))
 
 ;;hide-mode-line
 (use-package hide-mode-line
